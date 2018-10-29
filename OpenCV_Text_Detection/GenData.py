@@ -6,14 +6,14 @@ import cv2
 import os
 
 # module level variables ##########################################################################
-MIN_CONTOUR_AREA = 100
+MIN_CONTOUR_AREA = 300
 
 RESIZED_IMAGE_WIDTH = 20
 RESIZED_IMAGE_HEIGHT = 30
 
 ###################################################################################################
 def main():
-    imgTrainingNumbers = cv2.imread("training_chars.png")            # read in training numbers image
+    imgTrainingNumbers = cv2.imread("NewTraining.png")            # read in training numbers image
 
     if imgTrainingNumbers is None:                          # if image was not read successfully
         print( "error: image not read from file \n\n")        # print error message to std out
@@ -90,8 +90,8 @@ def main():
 
     print("\n\ntraining complete !!\n")
 
-    np.savetxt("classifications.txt", npaClassifications)           # write flattened images to file
-    np.savetxt("flattened_images.txt", npaFlattenedImages)          #
+    np.savetxt("New_Classifications.txt", npaClassifications)           # write flattened images to file
+    np.savetxt("New_Flattened_Images.txt", npaFlattenedImages)          #
 
     cv2.destroyAllWindows()             # remove windows from memory
 
