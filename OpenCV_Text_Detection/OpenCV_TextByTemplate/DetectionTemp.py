@@ -6,9 +6,11 @@ import time
 
 #reads the template image and the image being searched through as greyscale
 img = cv2.imread('D_2.png', 0)
+
 img2 = img.copy()
-#set template to image 'Template_A.png'
-template = cv2.imread('D_Temp.png',0)
+#template = cv2.imread('D_Temp.png',0)
+original = cv2.imread('D_Temp.png',0)
+ret,template = cv2.threshold(original, 200, 255, cv2.THRESH_BINARY)
 cv2.imshow('image', template)
 
 
