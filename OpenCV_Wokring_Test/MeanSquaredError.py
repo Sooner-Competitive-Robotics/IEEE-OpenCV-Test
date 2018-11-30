@@ -19,7 +19,7 @@ def mse(imageA, imageB):
 
 compartor_list = 'Stencil_A.png', 'Stencil_B.png', 'Stencil_C.png', 'Stencil_D.png', 'Stencil_E.png', 'Stencil_F.png'
 original = cv2.imread('D_Testing.png',0) #loading in the two images and resisizing the photo we took
-original = cv2.resize(original, (680,680))
+ret, original = cv2.threshold(original, 100, 255, cv2.THRESH_BINARY) #binary thresh it at value 100. It is now a black and white image
 
 for i in range (0,6):
 	compartor = cv2.imread(compartor_list[i],0)
