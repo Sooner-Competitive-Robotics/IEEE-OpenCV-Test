@@ -1,9 +1,9 @@
-from skimage.measure import compare_ssim as ssim
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 import os
 import time
+import sys
 
 def mse(imageA, imageB):
 	# the 'Mean Squared Error' between the two images is the
@@ -17,34 +17,34 @@ def mse(imageA, imageB):
 	
 	return err
 
-compartor_list = 'Stencil_A.png', 'Stencil_B.png', 'Stencil_C.png', 'Stencil_D.png', 'Stencil_E.png', 'Stencil_F.png'
-original = cv2.imread('D_Testing.png',0) #loading in the two images and resisizing the photo we took
-ret, original = cv2.threshold(original, 100, 255, cv2.THRESH_BINARY) #binary thresh it at value 100. It is now a black and white image
+def main():
+	compartor_list = 'Stencil_A.png', 'Stencil_B.png', 'Stencil_C.png', 'Stencil_D.png', 'Stencil_E.png', 'Stencil_F.png'
+	original = cv2.imread('D_Testing.png',0) #loading in the two images and resisizing the photo we took
+	ret, original = cv2.threshold(original, 100, 255, cv2.THRESH_BINARY) #binary thresh it at value 100. It is now a black and white image
 
-for i in range (0,6):
-	compartor = cv2.imread(compartor_list[i],0)
+	minValue = sys.maxsize
+	index = 0
+	for i in range (0,6):
+		compartor = cv2.imread(compartor_list[i],0)
+		
+		m = mse(original,compartor)
+		if m < minValue:
+			minValue = m
+			index = i
+		
+
+	if index == 0:
+		print("The letter is A")
+	elif index == 1:
+		print("The letter is B")
+	elif index == 2:
+		print("The letter is C")
+	elif index == 3:
+		print("The letter is D")
+	elif index == 4:
+		print("The letter is E")
+	elif index == 5:
+		print("The letter is F")
 	
-	m = mse(original,compartor)
-	s = ssim(original,compartor)
-	fig = plt.figure('difference between the two images')
-	plt.suptitle("MSE: %.2f, SSIM: %.2f" %(m, s))
-
-	ax = fig.add_subplot(1, 2, 1)
-	plt.imshow(original, cmap = plt.cm.gray)
-	plt.axis("off")
-	
-	# show the second image
-	ax = fig.add_subplot(1, 2, 2)
-	plt.imshow(compartor, cmap = plt.cm.gray)
-	plt.axis("off")
-	
-	# show the images
-	plt.show()
-
-
-
-
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-cv2.waitKey(1)
+if __name__ == '__main__':
+	main()	
