@@ -23,10 +23,10 @@ def main():
                      'Stencil_D_0.png', 'Stencil_D_90.png', 'Stencil_D_180.png', 'Stencil_D_270.png',\
                      'Stencil_E_0.png', 'Stencil_E_90.png', 'Stencil_E_180.png', 'Stencil_E_270.png',\
                      'Stencil_F_0.png', 'Stencil_F_90.png', 'Stencil_F_180.png', 'Stencil_F_270.png'
-    original = cv2.imread('A_Testing_180.png',0) #loading in the two images and resisizing the photo we took
+    original = cv2.imread('B_Testing.png',0) #loading in the two images and resisizing the photo we took
     ret, original = cv2.threshold(original, 100, 255, cv2.THRESH_BINARY) #binary thresh it at value 100. It is now a black and white image
 
-    values = 0,0,0,0,0,0
+    values = [0, 0, 0, 0, 0, 0]
     total = 0
     minIndex = 0
     minValue = sys.maxsize
@@ -34,10 +34,11 @@ def main():
     for i in range (0,6):
         for j in range (0,4):
             compartor = cv2.imread(compartor_list[total],0)
-            m = mse(original,compartor)
-            values[i] += m
-            ++total
+            m = mse(original, compartor)
+            values[i] = values[i] + m
+            total = total + 1
         values[i] = values[i]/4
+
 
     for i in range (0,6):
         if (values[i] < minValue):
@@ -45,7 +46,7 @@ def main():
             minValue = values[i]
 
 
-
+    print(values)
 
     switcher = {
         0: "A",
@@ -56,7 +57,7 @@ def main():
         5: "F"
     }
 
-    print (switcher.get(mseIndex, "Unclear"))
+    print (switcher.get(minIndex, "Unclear"))
 
 if __name__ == "__main__":
     main()
