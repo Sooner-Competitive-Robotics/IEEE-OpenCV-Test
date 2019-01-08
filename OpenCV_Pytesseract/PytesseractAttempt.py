@@ -5,16 +5,19 @@ pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\t
 
 
 def main():
+    counter = 0
     # list of letters we are looking for
     letters = ['A', 'B', 'C', 'D', 'E', 'F']
     original = cv2.imread('A_Testing_270.png', 0)
-    # binary thresh it at value 100. It is now a black and white image
+    # binary thresh it at value 100. It is now a black and white image could be used later not sure
     # ret, original = cv2.threshold(original, 100, 255, cv2.THRESH_BINARY)
     text = pytesseract.image_to_string(original, config='--psm 10')
-    while text not in letters:
+    # rotates the image until it recognizes it as a letter. If it never does it will stop after 4 rotations
+    while text not in letters and counter < 4:
         # if it does not recognize the letter it will rotate the image
         original = rotate(original)
         text = pytesseract.image_to_string(original, config='--psm 10')
+        counter = counter + 1
 
     print(text)
 
