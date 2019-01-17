@@ -4,6 +4,7 @@ import cv2
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
 
 def main():
+    # List of .png to compare
     pictures = ['A_Testing', 'A_Testing_90', 'A_Testing_180', 'A_Testing_270',
                 'B_Testing', 'B_Testing_90', 'B_Testing_180', 'B_Testing_270',
                 'C_Testing', 'C_Testing_90', 'C_Testing_180', 'C_Testing_270',
@@ -11,10 +12,9 @@ def main():
                 'E_Testing', 'E_Testing_90', 'E_Testing_180', 'E_Testing_270',
                 'F_Testing', 'F_Testing_90', 'F_Testing_180', 'F_Testing_270']
     index = 0
-    working = True;
 
     while index < 24:
-        #print(name)
+        name = pictures[index] + '.png'
         findImage(name)
         index = index + 1
 
