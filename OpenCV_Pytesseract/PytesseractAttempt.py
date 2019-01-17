@@ -3,12 +3,29 @@ import cv2
 
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
 
-
 def main():
+    pictures = ['A_Testing', 'A_Testing_90', 'A_Testing_180', 'A_Testing_270',
+                'B_Testing', 'B_Testing_90', 'B_Testing_180', 'B_Testing_270',
+                'C_Testing', 'C_Testing_90', 'C_Testing_180', 'C_Testing_270',
+                'D_Testing', 'D_Testing_90', 'D_Testing_180', 'D_Testing_270',
+                'E_Testing', 'E_Testing_90', 'E_Testing_180', 'E_Testing_270',
+                'F_Testing', 'F_Testing_90', 'F_Testing_180', 'F_Testing_270']
+    index = 0
+    working = True;
+
+    while index < 24:
+        #print(name)
+        findImage(name)
+        index = index + 1
+
+    print('done')
+     
+
+def findImage(name):
     counter = 0
     # list of letters we are looking for
     letters = ['A', 'B', 'C', 'D', 'E', 'F']
-    original = cv2.imread('A_Testing_270.png', 0)
+    original = cv2.imread(name, 0)
     # binary thresh it at value 100. It is now a black and white image could be used later not sure
     # ret, original = cv2.threshold(original, 100, 255, cv2.THRESH_BINARY)
     text = pytesseract.image_to_string(original, config='--psm 10')
