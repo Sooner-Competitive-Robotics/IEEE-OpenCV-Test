@@ -3,6 +3,7 @@ import cv2
 
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
 
+
 def main():
     # List of .png to compare
     pictures = ['A_Testing', 'A_Testing_90', 'A_Testing_180', 'A_Testing_270',
@@ -30,13 +31,17 @@ def findImage(name):
     # ret, original = cv2.threshold(original, 100, 255, cv2.THRESH_BINARY)
     text = pytesseract.image_to_string(original, config='--psm 10')
     # rotates the image until it recognizes it as a letter. If it never does it will stop after 4 rotations
-    while text not in letters and counter < 4:
+    best_text = text
+    while text not in letters and counter < 3:
         # if it does not recognize the letter it will rotate the image
         original = rotate(original)
         text = pytesseract.image_to_string(original, config='--psm 10')
         counter = counter + 1
+        # Case that if the text string is more than a letter it will check the first letter to see if it's in the list
+        if len(text) >= 1 and text[0] in letters:
+            best_text = text[0]
 
-    print(text)
+    print(best_text)
 
 
 def rotate(image):
