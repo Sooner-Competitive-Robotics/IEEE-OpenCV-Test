@@ -29,17 +29,24 @@ def findImage(name):
     original = cv2.imread(name, 0)
     # binary thresh it at value 100. It is now a black and white image could be used later not sure
     # ret, original = cv2.threshold(original, 100, 255, cv2.THRESH_BINARY)
-    text = pytesseract.image_to_string(original, config='--psm 10')
-    # rotates the image until it recognizes it as a letter. If it never does it will stop after 4 rotations
+
+    # read the picture
+    text = pytesseract.image_to_string(original, config = '--psm 10')
     best_text = text
+    # rotates the image until it recognizes it as a letter. If it never does it will stop after 4 rotations
     while text not in letters and counter < 3:
         # if it does not recognize the letter it will rotate the image
         original = rotate(original)
-        text = pytesseract.image_to_string(original, config='--psm 10')
+        text = pytesseract.image_to_string(original, config = '--psm 10')
         counter = counter + 1
         # Case that if the text string is more than a letter it will check the first letter to see if it's in the list
         if len(text) >= 1 and text[0] in letters:
             best_text = text[0]
+
+    # Edge case for E_90 being read as mm
+    for letter in best_text:
+        if letter is 'm':
+            return 'E'
 
     return best_text
 
