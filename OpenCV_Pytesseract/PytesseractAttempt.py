@@ -16,7 +16,7 @@ def main():
 
     while index < 24:
         name = pictures[index] + '.png'
-        findImage(name)
+        print(findImage(name))
         index = index + 1
 
     print('done')
@@ -41,7 +41,7 @@ def findImage(name):
         if len(text) >= 1 and text[0] in letters:
             best_text = text[0]
 
-    print(best_text)
+    return best_text
 
 
 def rotate(image):
