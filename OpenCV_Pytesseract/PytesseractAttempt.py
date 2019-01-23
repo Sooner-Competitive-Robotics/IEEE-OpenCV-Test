@@ -23,7 +23,6 @@ def main():
      
 
 def findImage(name):
-    counter = 0
     # list of letters we are looking for
     letters = ['A', 'B', 'C', 'D', 'E', 'F']
     original = cv2.imread(name, 0)
@@ -34,7 +33,8 @@ def findImage(name):
     text = pytesseract.image_to_string(original, config = '--psm 10')
     best_text = text
     # rotates the image until it recognizes it as a letter. If it never does it will stop after 4 rotations
-    while text not in letters and counter < 3:
+    counter = 0
+    while text not in letters and counter < 4:
         # if it does not recognize the letter it will rotate the image
         original = rotate(original)
         text = pytesseract.image_to_string(original, config = '--psm 10')
