@@ -33,9 +33,6 @@ def main():
         print(findImage(name, str(index)))
         index = index + 1
 
-
-    #print(findImage(pictures[0]))
-
     print("Done")
     cv2.waitKey(0)
     cv2.destroyAllWindows()
@@ -44,11 +41,12 @@ def findImage(name, windowname):
     # list of letters we are looking for
     letters = ['A', 'B', 'C', 'D', 'E', 'F']
     
-    # Convert picture to binary
+    # read image
     image = cv2.imread(name)
+    # convert image to grayscale
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    ret,thresh = cv2.threshold(gray_image, 80, 225, cv2.THRESH_BINARY)
-
+    gray_image = crop(gray_image)
+    ret,thresh = cv2.threshold(gray_image, 70, 255, cv2.THRESH_BINARY)
     cv2.imshow(windowname, thresh)
 
     # read the picture using Tesseract
@@ -63,6 +61,7 @@ def findImage(name, windowname):
 
     return text
 
+# rotates image 90 degrees
 def rotate(image):
     # get image height and width
     (h, w) = image.shape[:2]
@@ -76,7 +75,16 @@ def rotate(image):
 
     return rotated90
 
+# crops outer edges
+def crop(image):
+    # image dimensions
+    (x,y) = image.shape[:2]
+    numCrop = 50
 
+    # crop image
+    cropped = image[numCrop:x-numCrop, numCrop:y-numCrop]
+
+    return cropped
 
 if __name__ == "__main__":
     main()
