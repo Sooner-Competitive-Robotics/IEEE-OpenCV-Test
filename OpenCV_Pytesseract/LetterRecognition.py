@@ -31,6 +31,8 @@ def main():
     picturesE = ['E_Testing.png', 'E_Testing_90.png', 'E_Testing_180.png', 'E_Testing_270.png']
     picturesF = ['F_Testing.png', 'F_Testing_90.png', 'F_Testing_180.png', 'F_Testing_270.png']
 
+    test = ['A1.png', 'B1.png', 'C1.png', 'D1.png', 'E1.png', 'F1.png']
+
     pictures = picturesAll
 
     # Text detect all the letters
@@ -69,7 +71,8 @@ def findImage(name, windowname):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     gray_image = crop(gray_image)
     gray_image = cv2.medianBlur(gray_image, 5)
-    ret,thresh = cv2.threshold(gray_image, 103, 255, cv2.THRESH_BINARY)
+    gray_image = resize(gray_image)
+    ret,thresh = cv2.threshold(gray_image, 103, 255, cv2.THRESH_BINARY) #optimal threshold 103
     cv2.imshow(windowname, thresh)
 
     # read the picture using Tesseract
@@ -82,12 +85,12 @@ def findImage(name, windowname):
         thresh = rotate(thresh)
         text = pytesseract.image_to_string(thresh, config='--psm 10')
         
-        #text = pytesseract.image_to_string(thresh, lang = "Stencil", config='-c tessedit_char_whitelist=ABCDEF --psm 10')
         counter = counter + 1
         print("rotated")
 
     if text not in letters:
-        text = pytesseract.image_to_string(thresh, lang = "Stencil", config = '-c tessedit_char_whitelist=ABCDEF --psm 10')
+        print("NOT IN LETTERS")
+        text = pytesseract.image_to_string(thresh, config = '-c tessedit_char_whitelist=ABCDEF --psm 10')
 
     return text
 
@@ -115,6 +118,15 @@ def crop(image):
     cropped = image[numCrop:x-numCrop, numCrop:y-numCrop]
 
     return cropped
+
+# Resize images to make them smaller
+def resize(image):
+    resizeFactor = 0.4
+
+    (width, height) = image.shape[:2]
+    new_size = int(width*resizeFactor), int(height*resizeFactor)
+    image = cv2.resize(image, new_size)
+    return image
 
 if __name__ == "__main__":
     main()
