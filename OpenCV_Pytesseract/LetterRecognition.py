@@ -87,10 +87,18 @@ def findImage(name, windowname):
 	
 	if text not in letters:
 		print("NOT IN LETTERS")
-		num = random.randint(1, 7)
+		num = random.randint(1, 6)
 		
-        
-
+		switcher = {
+			1: "A",
+			2: "B",
+			3: "C",
+			4: "D",
+			5: "E",
+			6: "F"
+		}
+		text = switcher.get(num)
+		
 	return text
 
 # rotates image 90 degrees
