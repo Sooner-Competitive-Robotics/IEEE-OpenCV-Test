@@ -1,8 +1,7 @@
 import cv2
 import numpy as np
 
-
-print("hi")
+#print("hi")
 # Read image
 img = cv2.imread("A_2.png")
 cv2.namedWindow("Original Image",cv2.WINDOW_NORMAL)
