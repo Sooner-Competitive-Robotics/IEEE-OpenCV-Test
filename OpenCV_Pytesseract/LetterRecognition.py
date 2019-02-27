@@ -90,7 +90,22 @@ def findImage(name, windowname):
 
     if text not in letters:
         print("NOT IN LETTERS")
-        text = pytesseract.image_to_string(thresh, config = '-c tessedit_char_whitelist=ABCDEF --psm 10')
+		
+		num = random.randint(1, 7);
+		if num == 1:
+			text = "A"
+		if num == 2:
+			text = "B"
+		if num == 3:
+			text = "C"
+		if num == 4:
+			text = "D"
+		if num == 5:
+			text = "E"
+		if num == 6:
+			text = "F"
+		
+        #text = pytesseract.image_to_string(thresh, config = '-c tessedit_char_whitelist=ABCDEF --psm 10')
 
     return text
 
