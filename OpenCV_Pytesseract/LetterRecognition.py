@@ -1,10 +1,6 @@
-
-#from tesserocr import PyTessBaseAPI, RIL, iterate_level
 import pytesseract
 import cv2
 import random
-
-from tesserocr import PyTessBaseAPI
 
 # using version 4
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
