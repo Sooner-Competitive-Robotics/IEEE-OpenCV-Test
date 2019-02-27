@@ -83,6 +83,4 @@ for item in corners:
 cv2.namedWindow("Corners", cv2.WINDOW_NORMAL)
 cv2.imshow("Corners",img)
 cv2.waitKey()
-	
-
 
