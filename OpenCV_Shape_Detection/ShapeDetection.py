@@ -92,4 +92,6 @@ def findImage(approxPolyDP):
 		cv2.drawContours(img,[cnt],-1,(255,0,0),3)
 		cv2.putText(img,'Sphere', pt ,cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 2, [255, 0, 0], 2)
 
+if __name__ == "__main__":
+	main()
 
