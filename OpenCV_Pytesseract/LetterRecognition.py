@@ -2,6 +2,7 @@
 #from tesserocr import PyTessBaseAPI, RIL, iterate_level
 import pytesseract
 import cv2
+import random
 
 from tesserocr import PyTessBaseAPI
 
@@ -61,53 +62,40 @@ def main():
 
 
 def findImage(name, windowname):
-    # list of letters we are looking for
-    letters = ['A', 'B', 'C', 'D', 'E', 'F']
-    
-    # read image
-    image = cv2.imread(name)
-
-    # convert image to grayscale
-    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    gray_image = crop(gray_image)
-    gray_image = cv2.medianBlur(gray_image, 5)
-    gray_image = resize(gray_image)
-    ret,thresh = cv2.threshold(gray_image, 103, 255, cv2.THRESH_BINARY) #optimal threshold 103
-    cv2.imshow(windowname, thresh)
-
-    # read the picture using Tesseract
-    text = pytesseract.image_to_string(thresh, config='--psm 10')
+	# list of letters we are looking for
+	letters = ['A', 'B', 'C', 'D', 'E', 'F']
+	
+	# read image
+	image = cv2.imread(name)
+	
+	# convert image to grayscale
+	gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+	gray_image = crop(gray_image)
+	gray_image = cv2.medianBlur(gray_image, 5)
+	gray_image = resize(gray_image)
+	ret,thresh = cv2.threshold(gray_image, 103, 255, cv2.THRESH_BINARY) #optimal threshold 103
+	cv2.imshow(windowname, thresh)
+	
+	# read the picture using Tesseract
+	text = pytesseract.image_to_string(thresh, config='--psm 10')
     #return text
 
     # rotates image until it recognizes it as a letter. Max rotation of 4
-    counter = 0
-    while text not in letters and counter < 4:
-        thresh = rotate(thresh)
-        text = pytesseract.image_to_string(thresh, config='--psm 10')
+	counter = 0
+	while text not in letters and counter < 4:
+		thresh = rotate(thresh)
+		text = pytesseract.image_to_string(thresh, config='--psm 10')
         
-        counter = counter + 1
-        print("rotated")
-
-    if text not in letters:
-        print("NOT IN LETTERS")
+		counter = counter + 1
+		print("rotated")
+	
+	if text not in letters:
+		print("NOT IN LETTERS")
+		num = random.randint(1, 7)
 		
-		num = random.randint(1, 7);
-		if num == 1:
-			text = "A"
-		if num == 2:
-			text = "B"
-		if num == 3:
-			text = "C"
-		if num == 4:
-			text = "D"
-		if num == 5:
-			text = "E"
-		if num == 6:
-			text = "F"
-		
-        #text = pytesseract.image_to_string(thresh, config = '-c tessedit_char_whitelist=ABCDEF --psm 10')
+        
 
-    return text
+	return text
 
 # rotates image 90 degrees
 def rotate(image):
