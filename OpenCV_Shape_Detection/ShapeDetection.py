@@ -7,7 +7,7 @@ def main():
 
 def findShape():
 	# Read image
-	img = cv2.imread("OneCube.jpg")
+	img = cv2.imread("A1.jpg")
 	cv2.namedWindow("Original Image",cv2.WINDOW_NORMAL)
 	cv2.imshow("Original Image",img)
 	
@@ -22,7 +22,7 @@ def findShape():
 	cv2.imshow("Noise Removed Image",noise_removal)
 	
 	# Thresholding the image
-	ret,thresh_image = cv2.threshold(noise_removal,0,255,cv2.THRESH_OTSU)
+	ret,thresh_image = cv2.threshold(noise_removal,150,255,cv2.THRESH_BINARY)
 	cv2.namedWindow("Image after Thresholding",cv2.WINDOW_NORMAL)
 	cv2.imshow("Image after Thresholding",thresh_image)
 	
@@ -45,7 +45,7 @@ def findShape():
 	for cnt in contours:
 		approx = cv2.approxPolyDP(cnt,0.01*cv2.arcLength(cnt,True),True)
 	
-		if len(approx) == 6:
+		if len(approx) <= 6 and len(approx) > 2:
 			print("Cube")
 			cv2.drawContours(img,[cnt],-1,(255,0,0),3)
 			cv2.putText(img,'Cube', pt ,cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 2, [0, 255, 255], 2)
