@@ -29,9 +29,9 @@ def center(imagename):
 		cY = int(M["m01"] / M["m00"])
 		
 		cv2.drawContours(image, [c], -1, (0, 255, 0), 2)
-		cv2.circle(image, (cX, cY), 7, (255, 255, 255), -1)
+		cv2.circle(image, (cX, cY), 7, (0, 0, 255), -1)
 		cv2.putText(image, "center", (cX - 20, cY - 20),
-		cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+		cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 		
 		cv2.imshow("Image", image)
 		cv2.waitKey(0)
