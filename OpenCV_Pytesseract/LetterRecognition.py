@@ -10,25 +10,25 @@ def main():
 
     success = 0
     # list of pictures to compare
-    picturesAll = ['A_Testing.png', 'A_Testing_90.png', 'A_Testing_180.png', 'A_Testing_270.png',
-                'B_Testing.png', 'B_Testing_90.png', 'B_Testing_180.png', 'B_Testing_270.png',
-                'C_Testing.png', 'C_Testing_90.png', 'C_Testing_180.png', 'C_Testing_270.png',
-                'D_Testing.png', 'D_Testing_90.png', 'D_Testing_180.png', 'D_Testing_270.png',
-                'E_Testing.png', 'E_Testing_90.png', 'E_Testing_180.png', 'E_Testing_270.png',
-                'F_Testing.png', 'F_Testing_90.png', 'F_Testing_180.png', 'F_Testing_270.png']
+    picturesAll = ['A_Testing', 'A_Testing_90', 'A_Testing_180', 'A_Testing_270',
+                'B_Testing', 'B_Testing_90', 'B_Testing_180', 'B_Testing_270',
+                'C_Testing', 'C_Testing_90', 'C_Testing_180', 'C_Testing_270',
+                'D_Testing', 'D_Testing_90', 'D_Testing_180', 'D_Testing_270',
+                'E_Testing', 'E_Testing_90', 'E_Testing_180', 'E_Testing_270',
+                'F_Testing', 'F_Testing_90', 'F_Testing_180', 'F_Testing_270']
 
-    pictures0 = ['A_Testing.png', 'B_Testing.png', 'C_Testing.png','D_Testing.png','E_Testing.png','F_Testing.png']
-    pictures90 = ['A_Testing_90.png', 'B_Testing_90.png', 'C_Testing_90.png','D_Testing_90.png','E_Testing_90.png','F_Testing_90.png']
-    pictures180 = ['A_Testing_180.png','B_Testing_180.png', 'C_Testing_180.png', 'D_Testing_180.png', 'E_Testing_180.png', 'F_Testing_180.png']
-    pictures270 = ['A_Testing_270.png','B_Testing_270.png','C_Testing_270.png','D_Testing_270.png','E_Testing_270.png','F_Testing_270.png']
-    picturesA = ['A_Testing.png', 'A_Testing_90.png', 'A_Testing_180.png', 'A_Testing_270.png']
-    picturesB = ['B_Testing.png', 'B_Testing_90.png', 'B_Testing_180.png', 'B_Testing_270.png']
-    picturesC = ['C_Testing.png', 'C_Testing_90.png', 'C_Testing_180.png', 'C_Testing_270.png']
-    picturesD = ['D_Testing.png', 'D_Testing_90.png', 'D_Testing_180.png', 'D_Testing_270.png']
-    picturesE = ['E_Testing.png', 'E_Testing_90.png', 'E_Testing_180.png', 'E_Testing_270.png']
-    picturesF = ['F_Testing.png', 'F_Testing_90.png', 'F_Testing_180.png', 'F_Testing_270.png']
+    pictures0 = ['A_Testing', 'B_Testing', 'C_Testing','D_Testing','E_Testing','F_Testing']
+    pictures90 = ['A_Testing_90', 'B_Testing_90', 'C_Testing_90','D_Testing_90','E_Testing_90','F_Testing_90']
+    pictures180 = ['A_Testing_180','B_Testing_180', 'C_Testing_180', 'D_Testing_180', 'E_Testing_180', 'F_Testing_180']
+    pictures270 = ['A_Testing_270','B_Testing_270','C_Testing_270','D_Testing_270','E_Testing_270','F_Testing_270']
+    picturesA = ['A_Testing', 'A_Testing_90', 'A_Testing_180', 'A_Testing_270']
+    picturesB = ['B_Testing', 'B_Testing_90', 'B_Testing_180', 'B_Testing_270']
+    picturesC = ['C_Testing', 'C_Testing_90', 'C_Testing_180', 'C_Testing_270']
+    picturesD = ['D_Testing', 'D_Testing_90', 'D_Testing_180', 'D_Testing_270']
+    picturesE = ['E_Testing', 'E_Testing_90', 'E_Testing_180', 'E_Testing_270']
+    picturesF = ['F_Testing', 'F_Testing_90', 'F_Testing_180', 'F_Testing_270']
 
-    test = ['A1.png', 'B1.png', 'C1.png', 'D1.png', 'E1.png', 'F1.png']
+    test = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1']
 
     pictures = picturesAll
 
@@ -38,7 +38,7 @@ def main():
     while index <  len(pictures):
 
         textRead = ""
-        name = pictures[index]
+        name = pictures[index] + ".jpg"
 
         letter = name[0:1]
         print("Testing " + letter)
@@ -68,8 +68,9 @@ def findImage(name, windowname):
 	gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 	gray_image = crop(gray_image)
 	gray_image = cv2.medianBlur(gray_image, 5)
+	gray_image = cv2.bilateralFilter(gray_image,9,75,75)
 	gray_image = resize(gray_image)
-	ret,thresh = cv2.threshold(gray_image, 103, 255, cv2.THRESH_BINARY) #optimal threshold 103
+	ret,thresh = cv2.threshold(gray_image, 100, 255, cv2.THRESH_BINARY) #optimal threshold 103
 	cv2.imshow(windowname, thresh)
 	
 	# read the picture using Tesseract
