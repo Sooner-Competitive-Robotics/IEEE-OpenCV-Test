@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 
+# Returns true if cube is found. Otherwise false
+
 def main():
 	findShape()
 
@@ -22,7 +24,6 @@ def findShape():
 	cv2.imshow("Noise Removed Image",noise_removal)
 	
 	# Thresholding the image
-	
 	ret,thresh_image = cv2.threshold(noise_removal,200,255,cv2.THRESH_BINARY)
 	cv2.namedWindow("Image after Thresholding",cv2.WINDOW_NORMAL)
 	cv2.imshow("Image after Thresholding",thresh_image)
@@ -46,13 +47,17 @@ def findShape():
 	for cnt in contours:
 		approx = cv2.approxPolyDP(cnt,0.01*cv2.arcLength(cnt,True),True)
 	
-		if len(approx) == 6:
+		if len(approx) > 0 and len(approx) <= 6:
 			print("Cube")
+			isCube = true
 			cv2.drawContours(img,[cnt],-1,(255,0,0),3)
 			
-		elif len(approx) == 7:
-			print("Cube")
-			cv2.drawContours(img,[cnt],-1,(255,0,0),3)
+		#elif len(approx) == 7:
+		#	print("Cube")
+		#	cv2.drawContours(img,[cnt],-1,(255,0,0),3)
+		else:
+			isCube = false
+			print("Cube not found")
 			
 		#elif len(approx) == 8:
 	#		print("Cylinder")
@@ -72,6 +77,9 @@ def findShape():
 		cv2.circle(img,(x,y),10,255,-1)
 	cv2.namedWindow("Corners", cv2.WINDOW_NORMAL)
 	cv2.imshow("Corners",img)
+	
+	return isCube
+	
 	cv2.waitKey()
 
 if __name__ == "__main__":
