@@ -49,14 +49,14 @@ def findShape():
 	
 		if len(approx) > 0 and len(approx) <= 6:
 			print("Cube")
-			isCube = true
+			isCube = True
 			cv2.drawContours(img,[cnt],-1,(255,0,0),3)
 			
 		#elif len(approx) == 7:
 		#	print("Cube")
 		#	cv2.drawContours(img,[cnt],-1,(255,0,0),3)
 		else:
-			isCube = false
+			isCube = False
 			print("Cube not found")
 			
 		#elif len(approx) == 8:
@@ -78,9 +78,10 @@ def findShape():
 	cv2.namedWindow("Corners", cv2.WINDOW_NORMAL)
 	cv2.imshow("Corners",img)
 	
+	cv2.waitKey()
 	return isCube
 	
-	cv2.waitKey()
+
 
 if __name__ == "__main__":
     main()
