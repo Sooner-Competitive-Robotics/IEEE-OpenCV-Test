@@ -71,7 +71,7 @@ def findImage(name, windowname):
 	gray_image = cv2.bilateralFilter(gray_image,9,75,75)
 	gray_image = resize(gray_image)
 	ret,thresh = cv2.threshold(gray_image, 100, 255, cv2.THRESH_BINARY) #optimal threshold 103
-	cv2.imshow(windowname, thresh)
+	#cv2.imshow(windowname, thresh)
 	
 	# read the picture using Tesseract
 	text = pytesseract.image_to_string(thresh, config='--psm 10')
