@@ -8,6 +8,7 @@ import imutils
 #			1 if object is to the right
 
 def main():
+	center("mothership1.jpg")
 	center("Left.jpg")
 	center("Right.jpg")
 	center("Center.jpg")

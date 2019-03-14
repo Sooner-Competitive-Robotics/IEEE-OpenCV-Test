@@ -38,7 +38,7 @@ def main():
     while index <  len(pictures):
 
         textRead = ""
-        name = pictures[index] + ".jpg"
+        name = pictures[index] + ".png"
 
         letter = name[0:1]
         print("Testing " + letter)
@@ -48,7 +48,7 @@ def main():
 
         if (textRead == letter):
             success = success + 1
-        index = index + 1
+        index = index + 1  
 
     print("Done")
     print("Number of successes: " + str(success))
