@@ -13,7 +13,7 @@ def findMothership(name):
 	img = cv2.imread(name)
 	cv2.imshow("original", img)
 	img = cv2.GaussianBlur(img, (5,5), 0)
-	cv2.imshow("blu", img)
+	cv2.imshow("blurred", img)
 	hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 	mask = cv2.inRange(hsv, (70, 25, 25), (86, 255, 255))
 	imask = mask>0
