@@ -8,7 +8,16 @@ import imutils
 #			1 if object is to the right
 
 def main():
-	center("out.png")
+	image = cv2.imread("picamera1.png")
+	cv2.imshow("image", image)
+	image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+	image = cv2.GaussianBlur(image, (5,5), 0)
+
+	image = cv2.threshold(image, 150, 255, cv2.THRESH_BINARY)[1]
+	
+	cv2.imshow("thresh", image)
+	cv2.waitKey(0)
+	#center("picamera1.png")
 	#center("Left.jpg")
 	#center("Right.jpg")
 	#enter("Center.jpg")
