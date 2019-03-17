@@ -4,9 +4,9 @@ import imutils
 import cv2
 
 def main():
-	KNOWN_DISTANCE = 8
-	KNOWN_WIDTH = 1.5
-	FOCAL_LENGTH = 721.541
+	KNOWN_DISTANCE = 8	# inches
+	KNOWN_WIDTH = 1.5	# inches
+	FOCAL_LENGTH = 721.541	# pixels
 	
 	#image = cv2.imread("knownDistance8.png")
 	#marker = find_marker(image)
