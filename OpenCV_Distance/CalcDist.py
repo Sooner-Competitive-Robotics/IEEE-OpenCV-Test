@@ -4,20 +4,26 @@ import imutils
 import cv2
 
 def main():
-	KNOWN_DISTANCE = 8	# inches
-	KNOWN_WIDTH = 1.5	# inches
-	FOCAL_LENGTH = 721.541	# pixels
-	
-	#image = cv2.imread("knownDistance8.png")
-	#marker = find_marker(image)
-	#focalLength = (marker[1][0] * KNOWN_DISTANCE) / KNOWN_WIDTH
+	calcDist("knownDistance5.png")
+	calcDist("knownDistance8.png")
 
-	image = cv2.imread("knownDistance8.png")
-	cv2.imshow("", image)
-	cv2.waitKey(0)
+# Finds focal lengths. Used for calibration
+def findFocalLength(name, KNOWN_DISTANCE):
+	#KNOWN_DISTANCE = 5
+	KNOWN_WIDTH = 1.5
+	image = cv2.imread(name)
+	marker = find_marker(image)
+	focalLength = (marker[1][0] * KNOWN_DISTANCE) / KNOWN_WIDTH
+	print(focalLength)
+
+# Returns the image with distance	
+def calcDist(name):
+	KNOWN_WIDTH = 1.5
+	FOCAL_LENGTH = 500
+	
+	image = cv2.imread(name)
 	marker = find_marker(image)
 	inches = dist2Cam(KNOWN_WIDTH, FOCAL_LENGTH, marker[1][0])
-
 	box = cv2.BoxPoints(marker) if imutils.is_cv2() else cv2.boxPoints(marker)
 	box = np.int0(box)
 	cv2.drawContours(image, [box], -1, (0, 255, 0), 2)
@@ -27,6 +33,7 @@ def main():
 	cv2.imshow("image", image)
 	cv2.waitKey(0)
 
+# returns contour with largest area
 def find_marker(image):
 	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 	gray = cv2.GaussianBlur(gray, (5, 5), 0)
@@ -40,6 +47,7 @@ def find_marker(image):
 
 	return cv2.minAreaRect(c)
 	
+# Calculates the distance
 def dist2Cam(knownWidth, focalLength, perWidth):
 	return knownWidth * focalLength / perWidth
 	
