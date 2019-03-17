@@ -8,7 +8,7 @@ import imutils
 #			1 if object is to the right
 
 def main():
-	center("picamera1.png")
+	center("pickup.png")
 	#center("Left.jpg")
 	#center("Right.jpg")
 	#enter("Center.jpg")

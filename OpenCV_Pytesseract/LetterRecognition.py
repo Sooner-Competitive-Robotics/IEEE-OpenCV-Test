@@ -3,7 +3,7 @@ import cv2
 import random
 
 # using version 4
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
+#pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
 
 
 def main():
@@ -30,7 +30,7 @@ def main():
 
     test = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1']
 
-    pictures = picturesAll
+    pictures = ['lightpicam']
 
     # Text detect all the letters
     index = 0
@@ -70,8 +70,8 @@ def findImage(name, windowname):
 	gray_image = cv2.medianBlur(gray_image, 5)
 	gray_image = cv2.bilateralFilter(gray_image,9,75,75)
 	gray_image = resize(gray_image)
-	ret,thresh = cv2.threshold(gray_image, 100, 255, cv2.THRESH_BINARY) #optimal threshold 103
-	#cv2.imshow(windowname, thresh)
+	ret,thresh = cv2.threshold(gray_image, 130, 255, cv2.THRESH_BINARY) #optimal threshold 103
+	cv2.imshow(windowname, thresh)
 	
 	# read the picture using Tesseract
 	text = pytesseract.image_to_string(thresh, config='--psm 10')

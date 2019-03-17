@@ -9,7 +9,7 @@ def main():
 
 def findShape():
 	# Read image
-	img = cv2.imread("Left.jpg")
+	img = cv2.imread("locating2.png")
 	cv2.namedWindow("Original Image",cv2.WINDOW_NORMAL)
 	cv2.imshow("Original Image",img)
 	
