@@ -4,16 +4,19 @@ import imutils
 import cv2
 
 def main():
+	KNOWN_DISTANCE = 8
 	KNOWN_WIDTH = 1.5
-	FOCAL_LENGTH = 0.141732
+	FOCAL_LENGTH = 721.541
+	
+	#image = cv2.imread("knownDistance8.png")
+	#marker = find_marker(image)
+	#focalLength = (marker[1][0] * KNOWN_DISTANCE) / KNOWN_WIDTH
 
-	image = cv2.imread("picamera1.png")
+	image = cv2.imread("knownDistance8.png")
 	cv2.imshow("", image)
 	cv2.waitKey(0)
 	marker = find_marker(image)
-	#   print(marker[1][0])
 	inches = dist2Cam(KNOWN_WIDTH, FOCAL_LENGTH, marker[1][0])
-	print(inches)
 
 	box = cv2.BoxPoints(marker) if imutils.is_cv2() else cv2.boxPoints(marker)
 	box = np.int0(box)
