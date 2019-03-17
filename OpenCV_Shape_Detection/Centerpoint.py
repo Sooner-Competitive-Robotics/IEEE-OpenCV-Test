@@ -8,16 +8,7 @@ import imutils
 #			1 if object is to the right
 
 def main():
-	image = cv2.imread("picamera1.png")
-	cv2.imshow("image", image)
-	image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-	image = cv2.GaussianBlur(image, (5,5), 0)
-
-	image = cv2.threshold(image, 150, 255, cv2.THRESH_BINARY)[1]
-	
-	cv2.imshow("thresh", image)
-	cv2.waitKey(0)
-	#center("picamera1.png")
+	center("picamera1.png")
 	#center("Left.jpg")
 	#center("Right.jpg")
 	#enter("Center.jpg")
@@ -27,7 +18,7 @@ def center(imagename):
 	image = cv2.imread(imagename)
 	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 	blurred = cv2.GaussianBlur(gray, (5, 5), 0)
-	thresh = cv2.threshold(blurred, 200, 255, cv2.THRESH_BINARY)[1]
+	thresh = cv2.threshold(blurred, 150, 255, cv2.THRESH_BINARY)[1]
 	
 	cv2.imshow("thresh", thresh)
 	cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
