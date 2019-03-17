@@ -4,13 +4,12 @@ import numpy as np
 # Returns true if cube is found. Otherwise false
 
 def main():
-	findShape()
+	findShape("locating2.png")
 
 
-def findShape():
+def findShape(name):
 	# Read image
-	img = cv2.imread("Left.jpg")
-	cv2.namedWindow("Original Image",cv2.WINDOW_NORMAL)
+	img = cv2.imread(name)
 	cv2.imshow("Original Image",img)
 	
 	# RGB to Gray scale conversion
